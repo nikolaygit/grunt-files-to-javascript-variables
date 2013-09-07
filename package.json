@@ -1,7 +1,7 @@
 {
   "name": "grunt-files-to-json-appender",
-  "description": "Files to JSON Appender",
-  "version": "0.1.2",
+  "description": "Appends file contents to JSON objects.",
+  "version": "0.1.3",
   "homepage": "https://github.com/sinnwerkstatt/grunt-files-to-json-appender",
   "author": {
     "name": "Nikolay Georgiev",
