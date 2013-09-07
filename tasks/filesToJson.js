@@ -39,7 +39,7 @@ function FilesToJsonAppenderTask(task, grunt) {
     this.options = task.options(FilesToJsonAppenderTask.Defaults);
 }
 
-FilesToJsonAppenderTask.taskName = 'files_to_json';
+FilesToJsonAppenderTask.taskName = 'filesToJson';
 FilesToJsonAppenderTask.taskDescription = 'Files to JSON Appender';
 
 FilesToJsonAppenderTask.Defaults = {

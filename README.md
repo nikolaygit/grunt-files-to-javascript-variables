@@ -17,7 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-files-to-json-appender');
 ```
 
-## The "files_to_json" task
+## The "filesToJson" task
 
 ### Explanation
 If you need to build JSON data from (a lot of) files (e.g. HTML files) you can use this task.
@@ -37,11 +37,11 @@ See the example in the source code for more information.
 
 
 ### Configuration
-In your project's Gruntfile, add a section named `files_to_json` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `filesToJson` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  files_to_json: {
+  filesToJson: {
       default_options: {
         options: {
             inputFilesFolder : 'test/data/matrix',
@@ -124,5 +124,6 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.1.2 - renamed task to filesToJson.
 * 0.1.1 - updated README and GitHub repository.
 * 0.1.0 - initial commit.
