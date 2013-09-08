@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     filesToJson: {
-      default_options: {
+      indicators: {
         options: {
             inputFilesFolder : 'test/data/matrix',
             inputFilePrefix : 'indicator-',
@@ -41,8 +41,27 @@ module.exports = function(grunt) {
                 'c2-' : 3,
                 'c3-' : 4
             },
-            jsonBaseFile : 'test/data/gwoe-indicators-data-partial.js',
+            jsonBaseFile : 'test/data/gwoe-indicators-data-base.js',
             jsonBaseFileVariable : 'indicators',
+            jsonBaseFileVariableSuffix : '.content',
+            jsonFileOutput : 'test/data/gwoe-indicators-data.js'
+        }
+      },
+      negativeCriteria: {
+        options: {
+            inputFilesFolder : 'test/data/matrix',
+            inputFilePrefix : 'negative-indicator-',
+            useIndexes : true,
+            jsonFileVariableIndexMap : {
+                'n1' : 0,
+                'n2' : 1,
+                'n3' : 2,
+                'n4' : 3,
+                'n5' : 4
+            },
+            jsonBaseFile : 'test/data/gwoe-indicators-data.js',
+            jsonBaseFileVariable : 'negativeCriteria',
+            jsonBaseFileVariableSuffix : '.content',
             jsonFileOutput : 'test/data/gwoe-indicators-data.js'
         }
       }

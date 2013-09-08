@@ -24,6 +24,7 @@
  * OUTPUTS:
  * <jsonBaseFile> : string (required)
  * <jsonBaseFileVariable> : string (required)
+ * <jsonBaseFileVariableSuffix> : string (optional)
  *
  * <jsonFileOutput> : string (required) - this file will be overwritten every time the task is run!
  *    jsonBaseFile
@@ -90,6 +91,8 @@ FilesToJsonAppenderTask.prototype = {
                     var numOfKeys = indexKeys.length;
                     for (var keyIndex = 0; keyIndex < numOfKeys; keyIndex++) {
                         var currentKey = indexKeys[keyIndex];
+                        grunt.log.debug('fileNameWithoutPrefix: ' + fileNameWithoutPrefix);
+                        grunt.log.debug('currentKey: ' + currentKey);
                         if (fileNameWithoutPrefix.startsWith(currentKey)) {
                             jsonFileVariableIndex = options.jsonFileVariableIndexMap[currentKey];
 
@@ -99,7 +102,8 @@ FilesToJsonAppenderTask.prototype = {
 
                             grunt.log.debug('found index: ' + jsonFileVariableIndex);
                             grunt.log.debug('fileNameWithoutIndexString: ' + fileNameWithoutIndexString);
-                            grunt.log.debug('fileNamePropertyOnly: ' + fileNamePropertyOnly);
+                            grunt.log.debug('fileNamePropertyOnly: ' + fileNamePropertyOnly +
+                                '(length='+fileNamePropertyOnly.length+')');
                         }
                     }
 
@@ -114,8 +118,10 @@ FilesToJsonAppenderTask.prototype = {
                 // remove the new lines and escape apostrophs '
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
-                finalJsonFileOutputString += '\n' + options.jsonBaseFileVariable + '[' + jsonFileVariableIndex + '].'+
-                    fileNamePropertyOnly + '.content = \'' + inputFileString + '\';\n';
+                finalJsonFileOutputString += '\n' + options.jsonBaseFileVariable + '[' + jsonFileVariableIndex + ']'+
+                    (fileNamePropertyOnly.length > 0 ? '.' + fileNamePropertyOnly : '') +
+                    (options.jsonBaseFileVariableSuffix? options.jsonBaseFileVariableSuffix : '') +
+                    ' = \'' + inputFileString + '\';\n';
             }
         });
 

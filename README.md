@@ -54,7 +54,7 @@ grunt.initConfig({
                 'c2-' : 3,
                 'c3-' : 4
             },
-            jsonBaseFile : 'test/data/gwoe-indicators-data-partial.js',
+            jsonBaseFile : 'test/data/gwoe-indicators-data-base.js',
             jsonBaseFileVariable : 'indicators',
             jsonFileOutput : 'test/data/gwoe-indicators-data.js'
         }
@@ -106,6 +106,14 @@ Required
 
 The variable in the 'jsonBaseFile' to which the properties will be added.
 
+#### options.jsonBaseFileVariableSuffix
+Type: `String`
+Default Value: ``
+
+You can define a suffix for the JSON variable.
+For example if you have as variable 'indicators', useIndexes is true and the suffix is '.content',
+then the file contents will be added to the JSON property 'indicators[index].<propertyNameFromFileName>.content'.
+
 #### options.jsonFileOutput
 Type: `String`
 Required
@@ -124,6 +132,8 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-* 0.1.2 - renamed task to filesToJson.
+* 0.1.5 - fixed fileNamePropertyOnly bug.
+* 0.1.4 - added a new option jsonBaseFileVariableSuffix.
+* 0.1.3 - renamed task to filesToJson.
 * 0.1.1 - updated README and GitHub repository.
 * 0.1.0 - initial commit.
