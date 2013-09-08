@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       },
       negativeCriteria: {
         options: {
-            inputFilesFolder : 'test/data/matrix',
+            inputFilesFolder : 'test/data/matrix/N',
             inputFilePrefix : 'negative-indicator-',
             useIndexes : true,
             jsonFileVariableIndexMap : {
