@@ -96,8 +96,7 @@ FilesToJsonAppenderTask.prototype = {
                     var numOfKeys = indexKeys.length;
                     for (var keyIndex = 0; keyIndex < numOfKeys; keyIndex++) {
                         var currentKey = indexKeys[keyIndex];
-                        grunt.log.debug('fileNameWithoutPrefix: ' + fileNameWithoutPrefix);
-                        grunt.log.debug('currentKey: ' + currentKey);
+
                         if (fileNameWithoutPrefix.startsWith(currentKey)) {
                             jsonFileVariableIndex = options.jsonFileVariableIndexMap[currentKey];
 
