@@ -84,14 +84,10 @@ FilesToJsonAppenderTask.prototype = {
                 var fileNameWithoutIndexString = fileNameWithoutPrefix;
                 var fileNamePropertyOnly = null;
 
-                grunt.log.debug('inputFilePrefix : ' + fileNameWithoutPrefix);
-
                 var shouldUseIndexes = options.useIndexes && options.jsonFileVariableIndexMap !== undefined;
 
                 if (shouldUseIndexes) {
                     var indexKeys = Object.keys(options.jsonFileVariableIndexMap);
-
-                    grunt.log.debug('useIndexes');
 
                     var numOfKeys = indexKeys.length;
                     for (var keyIndex = 0; keyIndex < numOfKeys; keyIndex++) {
@@ -103,11 +99,6 @@ FilesToJsonAppenderTask.prototype = {
                             fileNameWithoutIndexString = fileNameWithoutIndexString.substr(currentKey.length);
                             fileNamePropertyOnly = fileNameWithoutIndexString.substr(
                                                     0, fileNameWithoutIndexString.lastIndexOf('.'));
-
-                            grunt.log.debug('found index: ' + jsonFileVariableIndex);
-                            grunt.log.debug('fileNameWithoutIndexString: ' + fileNameWithoutIndexString);
-                            grunt.log.debug('fileNamePropertyOnly: ' + fileNamePropertyOnly +
-                                '(length='+fileNamePropertyOnly.length+')');
                         }
                     }
 
@@ -127,17 +118,21 @@ FilesToJsonAppenderTask.prototype = {
                 // remove the new lines and escape apostrophs '
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
-                finalJsonFileOutputString += '\n' + options.jsonBaseFileVariable +
+                var fullProperty = options.jsonBaseFileVariable +
                     (shouldUseIndexes? '[' + jsonFileVariableIndex + ']' : '' ) +
                     (fileNamePropertyOnly.length > 0 ? '.' + fileNamePropertyOnly : '') +
-                    (options.jsonBaseFileVariableSuffix? options.jsonBaseFileVariableSuffix : '') +
+                    (options.jsonBaseFileVariableSuffix? options.jsonBaseFileVariableSuffix : '');
+
+                grunt.log.debug('File contents added to: ' + fullProperty);
+
+                finalJsonFileOutputString += '\n' + fullProperty +
                     ' = \'' + inputFileString + '\';\n';
             }
         });
 
         var jsonBaseFileString = grunt.file.read(options.jsonBaseFile);
         grunt.file.write(options.jsonFileOutput, jsonBaseFileString + finalJsonFileOutputString);
-        grunt.log.debug('Saved final file: ' + options.jsonFileOutput);
+        grunt.log.debug('Saved output file: ' + options.jsonFileOutput);
     },
 
     checkOptions : function () {
