@@ -83,7 +83,12 @@ FilesToJsonAppenderTask.prototype = {
                 var jsonFileVariableIndex = null;
                 var fileNameWithoutIndexString = fileNameWithoutPrefix;
                 var fileNamePropertyOnly = null;
-                if (options.useIndexes && options.jsonFileVariableIndexMap !== undefined) {
+
+                grunt.log.debug('inputFilePrefix : ' + fileNameWithoutPrefix);
+
+                var shouldUseIndexes = options.useIndexes && options.jsonFileVariableIndexMap !== undefined;
+
+                if (shouldUseIndexes) {
                     var indexKeys = Object.keys(options.jsonFileVariableIndexMap);
 
                     grunt.log.debug('useIndexes');
@@ -111,6 +116,11 @@ FilesToJsonAppenderTask.prototype = {
                        grunt.fail.warn('No index string found in the options for the file' + abspath +
                            ' . Please add it to your options.');
                     }
+
+                } else {
+                    // if no index should be used, the the property matches the file name without the extension
+                    fileNamePropertyOnly = fileNameWithoutIndexString.substr(
+                                            0, fileNameWithoutIndexString.lastIndexOf('.'));
                 }
 
                 // read the file
@@ -118,7 +128,8 @@ FilesToJsonAppenderTask.prototype = {
                 // remove the new lines and escape apostrophs '
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
-                finalJsonFileOutputString += '\n' + options.jsonBaseFileVariable + '[' + jsonFileVariableIndex + ']'+
+                finalJsonFileOutputString += '\n' + options.jsonBaseFileVariable +
+                    (shouldUseIndexes? '[' + jsonFileVariableIndex + ']' : '' ) +
                     (fileNamePropertyOnly.length > 0 ? '.' + fileNamePropertyOnly : '') +
                     (options.jsonBaseFileVariableSuffix? options.jsonBaseFileVariableSuffix : '') +
                     ' = \'' + inputFileString + '\';\n';

@@ -77,6 +77,12 @@ Default value: ``
 
 If the files have prefix, you can set it.
 
+#### options.inputFileExtension
+Type: `String`
+Default value: any file extension
+
+If you add a file extension, then only these files will be appended.
+
 #### options.useIndexes
 Type: `boolean`
 Default value: `false`
@@ -132,6 +138,8 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.1.6 - added support for configuration without indexes. See the 'createJSTemplates' grunt configuration
+ and test/templates.
 * 0.1.5 - fixed fileNamePropertyOnly bug.
 * 0.1.4 - added a new option jsonBaseFileVariableSuffix.
 * 0.1.3 - renamed task to filesToJson.

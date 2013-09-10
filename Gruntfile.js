@@ -29,42 +29,52 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     filesToJson: {
-      indicators: {
-        options: {
-            inputFilesFolder : 'test/data/matrix',
-            inputFilePrefix : 'indicator-',
-            useIndexes : true,
-            jsonFileVariableIndexMap : {
-                'a1-' : 0,
-                'b1-' : 1,
-                'c1-' : 2,
-                'c2-' : 3,
-                'c3-' : 4
-            },
-            jsonBaseFile : 'test/data/gwoe-indicators-data-base.js',
-            jsonBaseFileVariable : 'indicators',
-            jsonBaseFileVariableSuffix : '.content',
-            jsonFileOutput : 'test/data/gwoe-indicators-data.js'
+
+        createJSTemplates: {
+            options: {
+                inputFilesFolder : 'test/templates',
+                inputFileExtension : 'html',
+                jsonBaseFile : 'test/templates/templates-base.js',
+                jsonBaseFileVariable : 'Template',
+                jsonFileOutput : 'test/templates/templates.js'
+            }
+        },
+        indicators: {
+            options: {
+                inputFilesFolder : 'test/data/matrix',
+                inputFilePrefix : 'indicator-',
+                useIndexes : true,
+                jsonFileVariableIndexMap : {
+                    'a1-' : 0,
+                    'b1-' : 1,
+                    'c1-' : 2,
+                    'c2-' : 3,
+                    'c3-' : 4
+                },
+                jsonBaseFile : 'test/data/gwoe-indicators-data-base.js',
+                jsonBaseFileVariable : 'indicators',
+                jsonBaseFileVariableSuffix : '.content',
+                jsonFileOutput : 'test/data/gwoe-indicators-data.js'
+            }
+        },
+        negativeCriteria: {
+            options: {
+                inputFilesFolder : 'test/data/matrix/N',
+                inputFilePrefix : 'negative-indicator-',
+                useIndexes : true,
+                jsonFileVariableIndexMap : {
+                    'n1' : 0,
+                    'n2' : 1,
+                    'n3' : 2,
+                    'n4' : 3,
+                    'n5' : 4
+                },
+                jsonBaseFile : 'test/data/gwoe-indicators-data.js',
+                jsonBaseFileVariable : 'negativeCriteria',
+                jsonBaseFileVariableSuffix : '.content',
+                jsonFileOutput : 'test/data/gwoe-indicators-data.js'
+            }
         }
-      },
-      negativeCriteria: {
-        options: {
-            inputFilesFolder : 'test/data/matrix/N',
-            inputFilePrefix : 'negative-indicator-',
-            useIndexes : true,
-            jsonFileVariableIndexMap : {
-                'n1' : 0,
-                'n2' : 1,
-                'n3' : 2,
-                'n4' : 3,
-                'n5' : 4
-            },
-            jsonBaseFile : 'test/data/gwoe-indicators-data.js',
-            jsonBaseFileVariable : 'negativeCriteria',
-            jsonBaseFileVariableSuffix : '.content',
-            jsonFileOutput : 'test/data/gwoe-indicators-data.js'
-        }
-      }
     }
 
   });
