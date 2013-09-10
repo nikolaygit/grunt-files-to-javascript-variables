@@ -138,6 +138,7 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.1.8 - improved debug statements and commit of templates.
 * 0.1.7 - removed unneeded debugging statements.
 * 0.1.6 - added support for configuration without indexes. See the 'createJSTemplates' grunt configuration
  and test/templates.
