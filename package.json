@@ -1,7 +1,7 @@
 {
   "name": "grunt-files-to-javascript-variables",
   "description": "Appends file contents to Javascript variables.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/nikolayhg/grunt-files-to-javascript-variables",
   "author": {
     "name": "Nikolay Georgiev",
@@ -26,6 +26,9 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "node-json-minify": "~0.1.3"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",

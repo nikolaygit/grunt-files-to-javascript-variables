@@ -100,7 +100,7 @@ The value is the index to which the Javascript variable will be added.
 See the configuration above for an example.
 
 
-#### options.removeWhiteSpaces
+#### options.shouldMinify
 Type: `boolean`
 Default value: `false`
 
@@ -146,6 +146,7 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.2.3 - option ``removeWhiteSpaces`` renamed ``shouldMinify``
 * 0.2.2 - new boolean option ``removeWhiteSpaces``
 * 0.2.1 - added support for JSON files.
 * 0.1.9 - renamed task to filesToJavascript.

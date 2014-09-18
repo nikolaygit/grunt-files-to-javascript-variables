@@ -46,9 +46,11 @@ FilesToJavascriptTask.taskDescription = 'Appends file contents to Javascript var
 FilesToJavascriptTask.Defaults = {
     inputFilePrefix: '',
     useIndexes: false,
-    removeWhiteSpaces: false,
+    shouldMinify: false,
     inputFileExtension: ''
 };
+
+JSON.minify = JSON.minify || require("node-json-minify");
 
 FilesToJavascriptTask.prototype = {
 
@@ -119,8 +121,8 @@ FilesToJavascriptTask.prototype = {
                 // remove the new lines and escape apostrophs '
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
-                if (options.removeWhiteSpaces) {
-                  inputFileString = inputFileString.replace(/\s/g, '');
+                if (options.shouldMinify) {
+                  inputFileString = JSON.minify(inputFileString);
                 }
 
                 var fullProperty = options.outputBaseFileVariable +
