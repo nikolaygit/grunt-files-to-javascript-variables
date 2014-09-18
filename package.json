@@ -1,23 +1,23 @@
 {
-  "name": "grunt-files-to-json-appender",
+  "name": "grunt-files-to-javascript-variables",
   "description": "Appends file contents to JSON objects.",
   "version": "0.1.8",
-  "homepage": "https://github.com/sinnwerkstatt/grunt-files-to-json-appender",
+  "homepage": "https://github.com/nikolayhg/grunt-files-to-javascript-variables",
   "author": {
     "name": "Nikolay Georgiev",
     "email": "nikolay@georgiev.cc"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:sinnwerkstatt/grunt-files-to-json-appender.git"
+    "url": "git@github.com:nikolayhg/grunt-files-to-javascript-variables.git"
   },
   "bugs": {
-    "url": "https://github.com/sinnwerkstatt/grunt-files-to-json-appender/issues"
+    "url": "https://github.com/nikolayhg/grunt-files-to-javascript-variables/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/sinnwerkstatt/grunt-files-to-json-appender/blob/master/LICENSE-MIT"
+      "url": "https://github.com/nikolayhg/grunt-files-to-javascript-variables/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",

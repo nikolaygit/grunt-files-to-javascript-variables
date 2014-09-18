@@ -1,6 +1,6 @@
 /*
- * grunt-files-to-json-appender
- * https://github.com/sinnwerkstatt/grunt-files-to-json-appender
+ * grunt-files-to-javascript-variables
+ * https://github.com/nikolayhg/grunt-files-to-javascript-variables
  *
  * Copyright (c) 2013 Nikolay Georgiev
  * Licensed under the MIT license.
