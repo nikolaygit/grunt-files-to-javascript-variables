@@ -105,6 +105,7 @@ Type: `boolean`
 Default value: `false`
 
 Removes the white space from the input files.
+Note: JSON comments should NOT be written like ``// comment ``, but instead like ``/* comment */``
 
 
 #### options.outputBaseFile
