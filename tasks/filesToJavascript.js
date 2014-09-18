@@ -125,8 +125,15 @@ FilesToJavascriptTask.prototype = {
 
                 grunt.log.debug('File contents added to: ' + fullProperty);
 
+                if (options.inputFileExtension === 'json') {
+                  // leave the json contents, without quoting them.
+                } else {
+                  // quote everything which is not json
+                  inputFileString = '\'' + inputFileString + '\'';
+                }
+
                 outputFileString += '\n' + fullProperty +
-                    ' = \'' + inputFileString + '\';\n';
+                    ' = ' + inputFileString + ';\n';
             }
         });
 

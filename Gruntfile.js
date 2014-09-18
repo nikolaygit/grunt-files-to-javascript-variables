@@ -39,6 +39,15 @@ module.exports = function(grunt) {
                 outputFile : 'test/templates/templates.js'
             }
         },
+        i18n: {
+            options: {
+                inputFilesFolder : 'test/i18n/data',
+                inputFileExtension : 'json',
+                outputBaseFile : 'test/i18n/i18n-base.js',
+                outputFile : 'test/i18n/i18n.js',
+                outputBaseFileVariable : 'resources'
+            }
+        },
         indicators: {
             options: {
                 inputFilesFolder : 'test/data/matrix',

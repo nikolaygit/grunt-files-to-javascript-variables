@@ -138,6 +138,7 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.2.0 - added support for JSON files.
 * 0.1.9 - renamed task to filesToJavascript.
 * 0.1.8 - improved debug statements and commit of templates.
 * 0.1.7 - removed unneeded debugging statements.
