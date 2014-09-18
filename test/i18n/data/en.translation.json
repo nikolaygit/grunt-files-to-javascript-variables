@@ -1,0 +1,14 @@
+{
+  "c": {
+    "address": "Adresse",
+    "email": "E-Mail",
+    "mobile": "Handynummer"
+  },
+  "level": "Stufen",
+  "all": "Alle",
+  "basic": "Basiswissen",
+  "intermediate": "Fortgeschritten ",
+  "advanced": "Experte",
+  "Software Engineering": "Softwaretechnik",
+  "Frontend": "Frontend"
+}

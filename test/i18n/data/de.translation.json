@@ -1,0 +1,15 @@
+{
+  "c": {
+    "address": "Address",
+    "email": "Email",
+    "mobile": "Mobile"
+  },
+  "level": "Levels",
+  "all": "All",
+  "basic": "Basic",
+  "intermediate": "Intermediate",
+  "advanced": "Advanced",
+  "Software Engineering": "Software Engineering",
+  "Frontend": "Frontend"
+}
+
