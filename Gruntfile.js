@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             options: {
                 inputFilesFolder : 'test/i18n/data',
                 inputFileExtension : 'json',
-                removeWhiteSpaces: true,
+                shouldMinify: true,
                 outputBaseFile : 'test/i18n/i18n-base.js',
                 outputFile : 'test/i18n/i18n.js',
                 outputBaseFileVariable : 'resources'
