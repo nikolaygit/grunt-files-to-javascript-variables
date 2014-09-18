@@ -46,6 +46,7 @@ FilesToJavascriptTask.taskDescription = 'Appends file contents to Javascript var
 FilesToJavascriptTask.Defaults = {
     inputFilePrefix: '',
     useIndexes: false,
+    removeWhiteSpaces: false,
     inputFileExtension: ''
 };
 
@@ -118,6 +119,10 @@ FilesToJavascriptTask.prototype = {
                 // remove the new lines and escape apostrophs '
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
+                if (options.removeWhiteSpaces) {
+                  inputFileString = inputFileString.replace(/\s/g, '');
+                }
+
                 var fullProperty = options.outputBaseFileVariable +
                     (shouldUseIndexes? '[' + variableIndex + ']' : '' ) +
                     (fileNamePropertyOnly.length > 0 ? '.' + fileNamePropertyOnly : '') +
@@ -159,9 +164,9 @@ FilesToJavascriptTask.prototype = {
         }
 
         if (!grunt.file.exists(options.inputFilesFolder)) {
-            grunt.fail.warn('The folder in the option "inputFilesFolder" does not exist!');
+            grunt.fail.warn('The folder in the option "inputFilesFolder" ('+options.inputFilesFolder+') does not exist!');
         } else if (!grunt.file.exists(options.outputBaseFile)) {
-            grunt.fail.warn('The file in the option "outputBaseFile" does not exist!');
+            grunt.fail.warn('The file in the option "outputBaseFile" ('+options.outputBaseFile+') does not exist!');
         }
     }
 };
