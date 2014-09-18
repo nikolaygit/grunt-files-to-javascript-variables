@@ -50,7 +50,7 @@ FilesToJavascriptTask.Defaults = {
     inputFileExtension: ''
 };
 
-JSON.minify = JSON.minify || require("node-json-minify");
+var commentJson = require('comment-json');
 
 FilesToJavascriptTask.prototype = {
 
@@ -122,7 +122,9 @@ FilesToJavascriptTask.prototype = {
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
                 if (options.shouldMinify) {
-                  inputFileString = JSON.minify(inputFileString);
+                  var parsedJson = commentJson.parse(inputFileString);
+                  inputFileString = commentJson.stringify(parsedJson);
+                  parsedJson = null;
                 }
 
                 var fullProperty = options.outputBaseFileVariable +
@@ -146,7 +148,7 @@ FilesToJavascriptTask.prototype = {
 
         var outputBaseFileString = grunt.file.read(options.outputBaseFile);
         grunt.file.write(options.outputFile, outputBaseFileString + outputFileString);
-        grunt.log.debug('Saved output file: ' + options.outputFile);
+        grunt.log.writeln('File saved: ' + options.outputFile);
     },
 
     checkOptions : function () {

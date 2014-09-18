@@ -147,6 +147,7 @@ Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+* 0.2.4 - change JSON minifying dependency, log message on file save.
 * 0.2.3 - option ``removeWhiteSpaces`` renamed ``shouldMinify``
 * 0.2.2 - new boolean option ``removeWhiteSpaces``
 * 0.2.1 - added support for JSON files.
