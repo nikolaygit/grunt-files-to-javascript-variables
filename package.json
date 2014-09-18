@@ -1,7 +1,7 @@
 {
   "name": "grunt-files-to-javascript-variables",
-  "description": "Appends file contents to JSON objects.",
-  "version": "0.1.8",
+  "description": "Appends file contents to Javascript variables.",
+  "version": "0.1.9",
   "homepage": "https://github.com/nikolayhg/grunt-files-to-javascript-variables",
   "author": {
     "name": "Nikolay Georgiev",
@@ -37,6 +37,11 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "files",
+    "javascript",
+    "variables",
+    "append",
+    "transform"
   ]
 }

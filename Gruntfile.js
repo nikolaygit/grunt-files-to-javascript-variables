@@ -28,15 +28,15 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    filesToJson: {
+    filesToJavascript: {
 
         createJSTemplates: {
             options: {
                 inputFilesFolder : 'test/templates',
                 inputFileExtension : 'html',
-                jsonBaseFile : 'test/templates/templates-base.js',
-                jsonBaseFileVariable : 'Template',
-                jsonFileOutput : 'test/templates/templates.js'
+                outputBaseFile : 'test/templates/templates-base.js',
+                outputBaseFileVariable : 'Template',
+                outputFile : 'test/templates/templates.js'
             }
         },
         indicators: {
@@ -44,17 +44,17 @@ module.exports = function(grunt) {
                 inputFilesFolder : 'test/data/matrix',
                 inputFilePrefix : 'indicator-',
                 useIndexes : true,
-                jsonFileVariableIndexMap : {
+                variableIndexMap : {
                     'a1-' : 0,
                     'b1-' : 1,
                     'c1-' : 2,
                     'c2-' : 3,
                     'c3-' : 4
                 },
-                jsonBaseFile : 'test/data/gwoe-indicators-data-base.js',
-                jsonBaseFileVariable : 'indicators',
-                jsonBaseFileVariableSuffix : '.content',
-                jsonFileOutput : 'test/data/gwoe-indicators-data.js'
+                outputBaseFile : 'test/data/gwoe-indicators-data-base.js',
+                outputBaseFileVariable : 'indicators',
+                outputBaseFileVariableSuffix : '.content',
+                outputFile : 'test/data/gwoe-indicators-data.js'
             }
         },
         negativeCriteria: {
@@ -62,17 +62,17 @@ module.exports = function(grunt) {
                 inputFilesFolder : 'test/data/matrix/N',
                 inputFilePrefix : 'negative-indicator-',
                 useIndexes : true,
-                jsonFileVariableIndexMap : {
+                variableIndexMap : {
                     'n1' : 0,
                     'n2' : 1,
                     'n3' : 2,
                     'n4' : 3,
                     'n5' : 4
                 },
-                jsonBaseFile : 'test/data/gwoe-indicators-data.js',
-                jsonBaseFileVariable : 'negativeCriteria',
-                jsonBaseFileVariableSuffix : '.content',
-                jsonFileOutput : 'test/data/gwoe-indicators-data.js'
+                outputBaseFile : 'test/data/gwoe-indicators-data.js',
+                outputBaseFileVariable : 'negativeCriteria',
+                outputBaseFileVariableSuffix : '.content',
+                outputFile : 'test/data/gwoe-indicators-data.js'
             }
         }
     }
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'filesToJson']);
+  grunt.registerTask('test', ['clean', 'filesToJavascript']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

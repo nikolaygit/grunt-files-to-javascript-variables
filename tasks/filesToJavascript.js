@@ -8,48 +8,48 @@
 'use strict';
 
 /**
- * A task that appends all files in a given folder to a JSON variable.
- * Every file name has a format containing the property name of the JSON variable.
+ * A task that appends all files in a given folder to JavaScript variables.
+ * Every file name has a format containing the property name of the Javascript variable.
  *
  * INPUTS:
  * <inputFilesFolder>**(<inputFilePrefix>)(indexString)property.<inputFileExtension>
  * (required)            (def: '')                              (def: any extension)
  *
  * <useIndexes> : boolean (def: false)
- * <jsonFileVariableIndexMap> : indexString->index (def: undefined)
+ * <variableIndexMap> : indexString->index (def: undefined)
  *
- * if useIndexes===true and jsonFileVariableIndexMap===undefined
- * then etc the jsonFileVariableIndexMap is { '00' : 0, '01' : 1, '02' : 2, ... }
+ * if useIndexes===true and variableIndexMap===undefined
+ * then etc the variableIndexMap is { '00' : 0, '01' : 1, '02' : 2, ... }
  *
  * OUTPUTS:
- * <jsonBaseFile> : string (required)
- * <jsonBaseFileVariable> : string (required)
- * <jsonBaseFileVariableSuffix> : string (optional)
+ * <outputBaseFile> : string (required)
+ * <outputBaseFileVariable> : string (required)
+ * <outputBaseFileVariableSuffix> : string (optional)
  *
- * <jsonFileOutput> : string (required) - this file will be overwritten every time the task is run!
- *    jsonBaseFile
- *    jsonBaseFileVariable.property or jsonBaseFileVariable[index].property
+ * <outputFile> : string (required) - this file will be overwritten every time the task is run!
+ *    outputBaseFile
+ *    outputBaseFileVariable.property or outputBaseFileVariable[index].property
  *
  * @param task - the grunt task
  * @param grunt - grunt itself
  * @constructor
  */
-function FilesToJsonAppenderTask(task, grunt) {
+function FilesToJavascriptTask(task, grunt) {
     this.origTask = task;
     this.grunt = grunt;
-    this.options = task.options(FilesToJsonAppenderTask.Defaults);
+    this.options = task.options(FilesToJavascriptTask.Defaults);
 }
 
-FilesToJsonAppenderTask.taskName = 'filesToJson';
-FilesToJsonAppenderTask.taskDescription = 'Appends file contents to JSON objects.';
+FilesToJavascriptTask.taskName = 'filesToJavascript';
+FilesToJavascriptTask.taskDescription = 'Appends file contents to Javascript variables.';
 
-FilesToJsonAppenderTask.Defaults = {
+FilesToJavascriptTask.Defaults = {
     inputFilePrefix: '',
     useIndexes: false,
     inputFileExtension: ''
 };
 
-FilesToJsonAppenderTask.prototype = {
+FilesToJavascriptTask.prototype = {
 
     run : function () {
 
@@ -58,7 +58,7 @@ FilesToJsonAppenderTask.prototype = {
         var options = this.options;
 
         // this string will contain all file contents and will be written in the output file at the end.
-        var finalJsonFileOutputString = '';
+        var outputFileString = '';
 
         grunt.file.recurse(options.inputFilesFolder, function (abspath, rootdir, subdir, filename) {
 
@@ -80,21 +80,21 @@ FilesToJsonAppenderTask.prototype = {
                     fileNameWithoutPrefix = filename.substr(options.inputFilePrefix.length, filename.length);
                 }
 
-                var jsonFileVariableIndex = null;
+                var variableIndex = null;
                 var fileNameWithoutIndexString = fileNameWithoutPrefix;
                 var fileNamePropertyOnly = null;
 
-                var shouldUseIndexes = options.useIndexes && options.jsonFileVariableIndexMap !== undefined;
+                var shouldUseIndexes = options.useIndexes && options.variableIndexMap !== undefined;
 
                 if (shouldUseIndexes) {
-                    var indexKeys = Object.keys(options.jsonFileVariableIndexMap);
+                    var indexKeys = Object.keys(options.variableIndexMap);
 
                     var numOfKeys = indexKeys.length;
                     for (var keyIndex = 0; keyIndex < numOfKeys; keyIndex++) {
                         var currentKey = indexKeys[keyIndex];
 
                         if (fileNameWithoutPrefix.startsWith(currentKey)) {
-                            jsonFileVariableIndex = options.jsonFileVariableIndexMap[currentKey];
+                            variableIndex = options.variableIndexMap[currentKey];
 
                             fileNameWithoutIndexString = fileNameWithoutIndexString.substr(currentKey.length);
                             fileNamePropertyOnly = fileNameWithoutIndexString.substr(
@@ -102,7 +102,7 @@ FilesToJsonAppenderTask.prototype = {
                         }
                     }
 
-                    if (jsonFileVariableIndex === null) {
+                    if (variableIndex === null) {
                        grunt.fail.warn('No index string found in the options for the file' + abspath +
                            ' . Please add it to your options.');
                     }
@@ -118,21 +118,21 @@ FilesToJsonAppenderTask.prototype = {
                 // remove the new lines and escape apostrophs '
                 inputFileString = inputFileString.replace(/\n/g, '').replace(/\'/g, '&apos;');
 
-                var fullProperty = options.jsonBaseFileVariable +
-                    (shouldUseIndexes? '[' + jsonFileVariableIndex + ']' : '' ) +
+                var fullProperty = options.outputBaseFileVariable +
+                    (shouldUseIndexes? '[' + variableIndex + ']' : '' ) +
                     (fileNamePropertyOnly.length > 0 ? '.' + fileNamePropertyOnly : '') +
-                    (options.jsonBaseFileVariableSuffix? options.jsonBaseFileVariableSuffix : '');
+                    (options.outputBaseFileVariableSuffix? options.outputBaseFileVariableSuffix : '');
 
                 grunt.log.debug('File contents added to: ' + fullProperty);
 
-                finalJsonFileOutputString += '\n' + fullProperty +
+                outputFileString += '\n' + fullProperty +
                     ' = \'' + inputFileString + '\';\n';
             }
         });
 
-        var jsonBaseFileString = grunt.file.read(options.jsonBaseFile);
-        grunt.file.write(options.jsonFileOutput, jsonBaseFileString + finalJsonFileOutputString);
-        grunt.log.debug('Saved output file: ' + options.jsonFileOutput);
+        var outputBaseFileString = grunt.file.read(options.outputBaseFile);
+        grunt.file.write(options.outputFile, outputBaseFileString + outputFileString);
+        grunt.log.debug('Saved output file: ' + options.outputFile);
     },
 
     checkOptions : function () {
@@ -141,30 +141,30 @@ FilesToJsonAppenderTask.prototype = {
 
         if (options.inputFilesFolder === undefined) {
             grunt.fail.warn('Missing required option "inputFilesFolder"!');
-        } else if (options.jsonBaseFile === undefined) {
-            grunt.fail.warn('Missing required option "jsonBaseFile"!');
+        } else if (options.outputBaseFile === undefined) {
+            grunt.fail.warn('Missing required option "outputBaseFile"!');
 
-        } else if (options.jsonBaseFileVariable === undefined) {
-            grunt.fail.warn('Missing required option "jsonBaseFileVariable"!');
+        } else if (options.outputBaseFileVariable === undefined) {
+            grunt.fail.warn('Missing required option "outputBaseFileVariable"!');
 
-        } else if (options.jsonFileOutput === undefined) {
-            grunt.fail.warn('Missing required option "jsonFileOutput"!');
+        } else if (options.outputFile === undefined) {
+            grunt.fail.warn('Missing required option "outputFile"!');
         }
 
         if (!grunt.file.exists(options.inputFilesFolder)) {
             grunt.fail.warn('The folder in the option "inputFilesFolder" does not exist!');
-        } else if (!grunt.file.exists(options.jsonBaseFile)) {
-            grunt.fail.warn('The file in the option "jsonBaseFile" does not exist!');
+        } else if (!grunt.file.exists(options.outputBaseFile)) {
+            grunt.fail.warn('The file in the option "outputBaseFile" does not exist!');
         }
     }
 };
 
 module.exports = function (grunt) {
     grunt.registerMultiTask(
-        FilesToJsonAppenderTask.taskName,
-        FilesToJsonAppenderTask.taskDescription,
+        FilesToJavascriptTask.taskName,
+        FilesToJavascriptTask.taskDescription,
         function () {
-            var task = new FilesToJsonAppenderTask(this, grunt);
+            var task = new FilesToJavascriptTask(this, grunt);
             task.run();
         });
 };
